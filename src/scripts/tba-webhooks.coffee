@@ -33,6 +33,7 @@ module.exports = (robot) ->
         message = '*Upcoming match:* '
         message += body.message_data.event_name + '\n'
         message += '*Time:* ' + twd(body.message_data.scheduled_time) + '\n'
+        message += '*Teams:*\n'
         message += team + '\n' for team in body.message_data.team_keys if body.message_data.team_keys
       when 'match_score'
         message = '*Match Score:* '
