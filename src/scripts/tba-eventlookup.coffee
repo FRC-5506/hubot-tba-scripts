@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   hubot eventlookup <eventcode> - Looks up the specified event code and returns info on the event
+#   hubot eventlookup <eventcode> - Looks up the specified event code and returns info on the event. Event code reference: https://goo.gl/a8rb8M
 #
 # Author:
 #   nh_99
