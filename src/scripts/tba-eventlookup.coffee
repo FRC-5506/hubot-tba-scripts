@@ -12,6 +12,7 @@
 #
 # Author:
 #   nh_99
+token - process.env.HUBOT_SLACK_TOKEN
 
 module.exports = (robot) ->
 
@@ -26,4 +27,11 @@ module.exports = (robot) ->
         message += '*Location:* ' + data.venue_address + '\n' if data.venue_address
         message += '*Website:* ' + data.website if data.website
         message += '*Start Date:* ' + data.start_date if data.start_date
+        if token = null
+          message = stripslack(message)
         msg.send(message)
+
+  stripslack = (toStrip) ->
+    toStrip = toStrip.replace(new RegExp('\\*', 'g'), '')
+    toStrip = toStrip.replace(new RegExp('\\_', 'g'), '')
+    return toStrip
