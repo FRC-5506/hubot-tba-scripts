@@ -8,11 +8,11 @@
 #   None
 #
 # Commands:
-#   hubot eventlookup <eventcode> - Looks up the specified event code and returns info on the event
+#   hubot eventlookup <eventcode> - Looks up the specified event code and returns info on the event. Event code reference: https://goo.gl/a8rb8M
 #
 # Author:
 #   nh_99
-token - process.env.HUBOT_SLACK_TOKEN
+token = process.env.HUBOT_SLACK_TOKEN
 
 module.exports = (robot) ->
 
@@ -25,7 +25,7 @@ module.exports = (robot) ->
         data = JSON.parse body
         message = '*Results for ' + data.name + '*\n'
         message += '*Location:* ' + data.venue_address + '\n' if data.venue_address
-        message += '*Website:* ' + data.website if data.website
+        message += '*Website:* ' + data.website if data.website + '\n'
         message += '*Start Date:* ' + data.start_date if data.start_date
         if token = null
           message = stripslack(message)
