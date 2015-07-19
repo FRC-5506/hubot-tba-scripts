@@ -34,7 +34,7 @@ module.exports = (robot) ->
         message += body.message_data.event_name + '\n'
         message += '*Time:* ' + twd(body.message_data.scheduled_time) + '\n'
         message += '*Teams:*\n'
-        message += team + '\n' for team in body.message_data.team_keys if body.message_data.team_keys
+        message += teams(body.message_data.team_keys)
       when 'match_score'
         message = '*Match Score:* '
         message += body.message_data.event_name + '\n'
@@ -72,7 +72,7 @@ twd = (time) ->
 
 teams = (teams) ->
   teambreak = ''
-  teambreak += team + '\n' for team in teams
+  teambreak += team + ' - http://thebluealliance.com/team/' +  team.replace('frc', '') + '\n' for team in teams
   return teambreak
 
 stripslack = (toStrip) ->
