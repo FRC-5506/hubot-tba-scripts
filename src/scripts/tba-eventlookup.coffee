@@ -24,7 +24,7 @@ module.exports = (robot) ->
       .get() (err, res, body) ->
         data = JSON.parse body
         message = '*Results for ' + data.name + '*\n'
-        message += '*Location:* ' + data.venue_address + '\n' if data.venue_address
+        message += '*Location:* ' + getLocation(data.venue_address) if data.venue_address
         message += '*Website:* ' + data.website + '\n' if data.website
         message += '*Start Date:* ' + data.start_date if data.start_date
         if token = null
@@ -35,3 +35,20 @@ module.exports = (robot) ->
     toStrip = toStrip.replace(new RegExp('\\*', 'g'), '')
     toStrip = toStrip.replace(new RegExp('\\_', 'g'), '')
     return toStrip
+
+  getLocation = (location) ->
+    mapType = "roadmap"
+    location = encodeURIComponent(location)
+    mapUrl   = "http://maps.google.com/maps/api/staticmap?markers=" +
+                location +
+                "&size=400x400&maptype=" +
+                mapType +
+                "&sensor=false" +
+                "&format=png" # So campfire knows it's an image
+    url      = "http://maps.google.com/maps?q=" +
+               location +
+              "&hl=en&sll=37.0625,-95.677068&sspn=73.579623,100.371094&vpsrc=0&hnear=" +
+              location +
+              "&t=m&z=11"
+
+    return mapUrl + '\n' + url + '\n'
